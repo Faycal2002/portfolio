@@ -9,6 +9,10 @@ import { vitePluginManusRuntime } from "vite-plugin-manus-runtime";
 const plugins = [react(), tailwindcss(), jsxLocPlugin(), vitePluginManusRuntime()];
 
 export default defineConfig({
+  // ⚠️ Mets ici le NOMBRE EXACT de ton repo GitHub
+  // Exemple : https://github.com/faycel/portfolio -> "/portfolio/"
+  base: "/portfolio/",
+
   plugins,
   resolve: {
     alias: {
@@ -18,14 +22,19 @@ export default defineConfig({
     },
   },
   envDir: path.resolve(import.meta.dirname),
+
+  // ton code est dans client/
   root: path.resolve(import.meta.dirname, "client"),
+
   build: {
-    outDir: path.resolve(import.meta.dirname, "dist/public"),
+    // 🔁 on simplifie : sortie dans /dist à la racine du projet
+    outDir: path.resolve(import.meta.dirname, "dist"),
     emptyOutDir: true,
   },
+
   server: {
     port: 3000,
-    strictPort: false, // Will find next available port if 3000 is busy
+    strictPort: false,
     host: true,
     allowedHosts: [
       ".manuspre.computer",
